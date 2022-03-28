@@ -21,8 +21,7 @@ class InterestingFacts extends Component {
             "https://api.chucknorris.io/jokes/random?category=animal",
             "https://api.chucknorris.io/jokes/random?category=dev",
             "https://api.chucknorris.io/jokes/random?category=history",
-            "https://api.chucknorris.io/jokes/random?category=money",
-            "https://api.chucknorris.io/jokes/random?category=political",
+            "https://api.chucknorris.io/jokes/random?category=money",            
             "https://api.chucknorris.io/jokes/random?category=science"
         ];
 
@@ -40,7 +39,7 @@ class InterestingFacts extends Component {
         };
         
         for (let i = 1; i <= 24; i++) {
-            const maxRnd = (i <= 12) ? 3 : 8;
+            const maxRnd = (i <= 12) ? 3 : 7;
             const rnd = Math.floor(Math.random() * (0 - maxRnd) + maxRnd);
 
             if (i <= 12) {
