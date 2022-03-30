@@ -1,5 +1,6 @@
 import React, {Component} from "react"
 import FactsList from '../Components/FactsList';
+import Loader from '../Components/Loader'
 import "./InterestingFacts.css"
 
 class InterestingFacts extends Component {
@@ -27,7 +28,8 @@ class InterestingFacts extends Component {
 
         this.state = {
             facts: [],          
-            cn: []
+            cn: [],
+            loading: true
         };        
     }
 
@@ -54,7 +56,7 @@ class InterestingFacts extends Component {
 
     async componentDidMount() {       
         const remoteURLs = this.getRemoteURLs();
-        console.log(remoteURLs);
+        //console.log(remoteURLs);
 
         try
         {
@@ -87,7 +89,8 @@ class InterestingFacts extends Component {
 
             this.setState({
                 "facts": facts,
-                "cn": cnData 
+                "cn": cnData,
+                "loading": false
             });
         }
         catch(err) {
@@ -96,17 +99,26 @@ class InterestingFacts extends Component {
     }
 
     render () {
+        
         return (
             <>            
                 <div id="mainContainer">
                     <div className="tc ma2">
                         <h1 className="f2 gold">Interesting Facts everyone should know!</h1>
                     </div>  
-                    <FactsList type="facts" facts={this.state.facts} />    
+
+                    <Loader loading={this.state.loading}> 
+                        <FactsList type="facts" facts={this.state.facts} />    
+                    </Loader>
+
                     <div className="tc ma2">
                         <h1 className="f2 gold">Wisdom of the ancients!</h1>
                     </div>     
-                    <FactsList type="cn" facts={this.state.cn} />        
+
+                    <Loader loading={this.state.loading}>
+                        <FactsList type="cn" facts={this.state.cn} />      
+                    </Loader>
+
                 </div>                      
             </>
         );

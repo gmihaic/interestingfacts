@@ -1,4 +1,5 @@
 import React, {Component} from "react"
+import Fact from "./Fact"
 import "./FactsList.css"
 
 class FactsList extends Component {
@@ -29,8 +30,16 @@ class FactsList extends Component {
                 <div className="factsContainer pa2 shadow-2">                   
                     {
                         this.props.facts.map((fact, idx) => {                                                      
-                            return (                              
+                            /*return (                              
                                <div key={`keyF${idx}`} className={this.getFactContainerClasses()}>{fact}</div>
+                            );*/
+
+                            return (
+                                <Fact 
+                                    key={`keyF${idx}`}
+                                    className={this.getFactContainerClasses()}
+                                    fact={fact}                                    
+                                />                         
                             );
                         })
                     }                   
