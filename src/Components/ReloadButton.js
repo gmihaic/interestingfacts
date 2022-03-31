@@ -14,9 +14,17 @@ class ReloadButton extends Component {
             return null;
         }
 
+        let buttonText = "Read more about it!";
+        let buttonBg = "bg-dark-green";
+
+        if (this.props?.isError) {
+            buttonText = "There was an error, please refresh!";
+            buttonBg = "bg-dark-red";
+        }
+
         return (
             <div className="buttonContainer">
-                <button onClick={this.props.reloadFnc} className="f4 link dim ph3 pv2 mb2 dib white bg-dark-green">Read more about it!</button>
+                <button onClick={this.props.reloadFnc} className={"f4 link dim ph3 pv2 mb2 dib white " + buttonBg}>{buttonText}</button>
             </div>
         );
     }

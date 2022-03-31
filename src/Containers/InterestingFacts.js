@@ -30,8 +30,9 @@ class InterestingFacts extends Component {
         this.state = {
             facts: [],          
             cn: [],
-            loading: true           
-        };        
+            loading: true,
+            isError: false        
+        };                
     }
 
     getRemoteURLs = () => {
@@ -57,9 +58,9 @@ class InterestingFacts extends Component {
     
     loadRemoteData = async () => {
         const remoteURLs = this.getRemoteURLs();       
-       
+             
         try
-        {
+        {           
             //first get the facts        
             const facts = await Promise.all(
                 remoteURLs["facts"].map(async (url) => {
@@ -87,16 +88,19 @@ class InterestingFacts extends Component {
             this.setState({
                 "facts": facts,
                 "cn": cnData,
-                "loading": false
+                "loading": false,
+                isError: false
             });
         }
         catch(err) {
-            console.error("oops", err);
+            this.setState({
+                loading: false,
+                isError: true
+            });
         }
     }    
 
-    componentDidMount() {     
-                   
+    componentDidMount() {                        
         this.loadRemoteData();                        
     }
 
@@ -110,6 +114,21 @@ class InterestingFacts extends Component {
 
     render () {
         
+        if (this.state?.isError) {
+            return (
+                <>
+                    <div id="mainContainer">
+                        <div className="tc ma2">
+                            <h1 className="f2 gold">Interesting Facts everyone should know!</h1>                            
+                        </div>   
+
+                        <ReloadButton isError={true} loading={this.state.loading} reloadFnc={this.reloadFacts}></ReloadButton> 
+
+                    </div>
+                </>
+            );
+        }
+
         return (
             <>            
                 <div id="mainContainer">
@@ -117,7 +136,7 @@ class InterestingFacts extends Component {
                         <h1 className="f2 gold">Interesting Facts everyone should know!</h1>
                     </div>                     
 
-                    <ReloadButton loading={this.state.loading} reloadFnc={this.reloadFacts}></ReloadButton>                          
+                    <ReloadButton loading={this.state.loading} reloadFnc={this.reloadFacts}></ReloadButton>                                              
                    
                     <Loader key={"lc1"} facts={this.state.facts} loading={this.state.loading}> 
                         <FactsList key={"fc1"} typeId="facts" type="facts" facts={this.state.facts} />    
