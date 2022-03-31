@@ -6,12 +6,12 @@ class Fact extends Component {
        
         super();
 
-        this.props = props;        
+        this.props = props;             
     }
 
     render() {              
         return (           
-                <div key={this.props.key} className={this.props.className}>{this.props.fact}</div>            
+                <div className={this.props.className}>{this.props.fact}</div>            
         );
     }
 }

@@ -1,0 +1,13 @@
+.buttonContainer
+{
+    margin-bottom: 50px;
+    display: flex;
+    justify-content: center;
+}
+
+.buttonContainer button
+{
+    border-radius: 8px;
+    border: 0;
+    cursor: pointer;    
+}

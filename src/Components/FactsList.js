@@ -8,7 +8,7 @@ class FactsList extends Component {
        
         super();
 
-        this.props = props;        
+        this.props = props;             
     }
 
     getFactContainerClasses = () => {
@@ -29,14 +29,10 @@ class FactsList extends Component {
             <>
                 <div className="factsContainer pa2 shadow-2">                   
                     {
-                        this.props.facts.map((fact, idx) => {                                                      
-                            /*return (                              
-                               <div key={`keyF${idx}`} className={this.getFactContainerClasses()}>{fact}</div>
-                            );*/
-
+                        this.props.facts.map((fact, idx) => {                                                                                 
                             return (
                                 <Fact 
-                                    key={`keyF${idx}`}
+                                    key={"key-" + this.props.typeId + "-F" + idx}
                                     className={this.getFactContainerClasses()}
                                     fact={fact}                                    
                                 />                         

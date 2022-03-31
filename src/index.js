@@ -5,8 +5,6 @@ import InterestingFacts from './Containers/InterestingFacts';
 import reportWebVitals from './reportWebVitals';
 import 'tachyons';
 
-//<a href="https://www.freepik.com/vectors/background">Background vector created by freepik - www.freepik.com</a>
-
 ReactDOM.render(
   <React.StrictMode>
     <InterestingFacts />

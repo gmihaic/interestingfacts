@@ -1,6 +1,7 @@
 import React, {Component} from "react"
 import FactsList from '../Components/FactsList';
 import Loader from '../Components/Loader'
+import ReloadButton from '../Components/ReloadButton'
 import "./InterestingFacts.css"
 
 class InterestingFacts extends Component {
@@ -29,7 +30,7 @@ class InterestingFacts extends Component {
         this.state = {
             facts: [],          
             cn: [],
-            loading: true
+            loading: true           
         };        
     }
 
@@ -53,11 +54,10 @@ class InterestingFacts extends Component {
 
         return urls;
     }
-
-    async componentDidMount() {       
-        const remoteURLs = this.getRemoteURLs();
-        //console.log(remoteURLs);
-
+    
+    loadRemoteData = async () => {
+        const remoteURLs = this.getRemoteURLs();       
+       
         try
         {
             //first get the facts        
@@ -82,10 +82,7 @@ class InterestingFacts extends Component {
             )
             .catch((err) => {
                 throw err;
-            });
-
-            //console.log("facts", facts);
-            //console.log("cndata", cnData);
+            });           
 
             this.setState({
                 "facts": facts,
@@ -95,8 +92,21 @@ class InterestingFacts extends Component {
         }
         catch(err) {
             console.error("oops", err);
-        }                 
+        }
+    }    
+
+    componentDidMount() {     
+                   
+        this.loadRemoteData();                        
     }
+
+    reloadFacts = () => {                
+        this.setState({
+            loading: true
+        });
+
+        this.loadRemoteData();
+    }    
 
     render () {
         
@@ -105,18 +115,20 @@ class InterestingFacts extends Component {
                 <div id="mainContainer">
                     <div className="tc ma2">
                         <h1 className="f2 gold">Interesting Facts everyone should know!</h1>
-                    </div>  
+                    </div>                     
 
-                    <Loader loading={this.state.loading}> 
-                        <FactsList type="facts" facts={this.state.facts} />    
+                    <ReloadButton loading={this.state.loading} reloadFnc={this.reloadFacts}></ReloadButton>                          
+                   
+                    <Loader key={"lc1"} facts={this.state.facts} loading={this.state.loading}> 
+                        <FactsList key={"fc1"} typeId="facts" type="facts" facts={this.state.facts} />    
                     </Loader>
 
                     <div className="tc ma2">
                         <h1 className="f2 gold">Wisdom of the ancients!</h1>
-                    </div>     
+                    </div>                        
 
-                    <Loader loading={this.state.loading}>
-                        <FactsList type="cn" facts={this.state.cn} />      
+                    <Loader key={"lc2"} facts={this.state.cn} loading={this.state.loading}>
+                        <FactsList key={"fc2"} typeId="cn" type="cn" facts={this.state.cn} />      
                     </Loader>
 
                 </div>                      
