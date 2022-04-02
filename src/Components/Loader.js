@@ -15,7 +15,7 @@ class Loader extends Component {
             return (
                 <>
                     <div className="loaderContainer">
-                        <img width="50" height="50" src="/loader.png" />
+                        <img width="50" height="50" src="https://gmihaic.github.io/interestingfacts/loader.png" />
                     </div>                   
                 </>
             );

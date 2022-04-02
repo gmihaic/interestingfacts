@@ -25,7 +25,7 @@ class Fact extends Component {
 
         if (this.props?.factType || this.props.factTypeId == "cn") {
             //factContent = "" + factContent;
-            imgContent = <img alt="" src={"/fact" + ((this.props.factTypeId == "cn") ? "cn" : this.props.factType) + ".jpg"} />;
+            imgContent = <img alt="" src={"https://gmihaic.github.io/interestingfacts/fact" + ((this.props.factTypeId == "cn") ? "cn" : this.props.factType) + ".jpg"} />;
         }
 
         return (           
