@@ -10,18 +10,18 @@ class InterestingFacts extends Component {
 
         super();
 
-        this.baseFactsUrls = [
-            "http://numbersapi.com/random/trivia",
-            "http://numbersapi.com/random/year",
-            "http://numbersapi.com/random/date",
-            "http://numbersapi.com/random/math"
+        this.baseFactsUrls = [            
+            "https://programming-quotes-api.herokuapp.com/quotes/random",
+            "https://programming-quotes-api.herokuapp.com/quotes/random",
+            "https://programming-quotes-api.herokuapp.com/quotes/random",
+            "https://programming-quotes-api.herokuapp.com/quotes/random"
         ];
 
         this.baseFactsUrlsTypes = [
-            "trivia",
-            "year",
-            "date",
-            "math"
+            "dev",
+            "dev",
+            "dev",
+            "dev"
         ];
 
         this.cnUrls = [
@@ -75,8 +75,8 @@ class InterestingFacts extends Component {
             const facts = await Promise.all(
                 remoteURLs["facts"].map(async (url) => {
                     const fetchedResponse = await fetch(url);
-                    const fetchedResponseText = await fetchedResponse.text();
-                    return fetchedResponseText;
+                    const fetchedResponseText = await fetchedResponse.json();
+                    return fetchedResponseText.en;
                 })
             )
             .catch((err) => {
