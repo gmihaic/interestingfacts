@@ -24,6 +24,15 @@ class FactsList extends Component {
         return classes;
     }
 
+    getFactType = (idx) => {
+
+        if (this?.props?.factTypes && this.props.factTypes[idx]) {
+            return this?.props.factTypes[idx];
+        }
+
+        return null;
+    }
+
     render() {              
         return (
             <>
@@ -34,7 +43,9 @@ class FactsList extends Component {
                                 <Fact 
                                     key={"key-" + this.props.typeId + "-F" + idx}
                                     className={this.getFactContainerClasses()}
-                                    fact={fact}                                    
+                                    factTypeId={this.props.typeId}
+                                    fact={fact}  
+                                    factType={this.getFactType(idx)}                                  
                                 />                         
                             );
                         })

@@ -17,6 +17,13 @@ class InterestingFacts extends Component {
             "http://numbersapi.com/random/math"
         ];
 
+        this.baseFactsUrlsTypes = [
+            "trivia",
+            "year",
+            "date",
+            "math"
+        ];
+
         this.cnUrls = [
             "https://api.chucknorris.io/jokes/random?category=career",
             "https://api.chucknorris.io/jokes/random?category=celebrity",
@@ -25,10 +32,11 @@ class InterestingFacts extends Component {
             "https://api.chucknorris.io/jokes/random?category=history",
             "https://api.chucknorris.io/jokes/random?category=money",            
             "https://api.chucknorris.io/jokes/random?category=science"
-        ];
+        ];        
 
         this.state = {
-            facts: [],          
+            facts: [],  
+            factTypes: [],        
             cn: [],
             loading: true,
             isError: false        
@@ -39,6 +47,7 @@ class InterestingFacts extends Component {
                 
         const urls = {
             "facts": [],
+            "factTypes": [],
             "cn": []
         };
         
@@ -48,6 +57,7 @@ class InterestingFacts extends Component {
 
             if (i <= 12) {
                 urls["facts"].push(this.baseFactsUrls[rnd]);
+                urls["factTypes"].push(this.baseFactsUrlsTypes[rnd]);
             } else {
                 urls["cn"].push(this.cnUrls[rnd]);
             }
@@ -84,10 +94,11 @@ class InterestingFacts extends Component {
             .catch((err) => {
                 throw err;
             });           
-
+            
             this.setState({
                 "facts": facts,
-                "cn": cnData,
+                "factTypes": remoteURLs["factTypes"],
+                "cn": cnData,             
                 "loading": false,
                 isError: false
             });
@@ -139,7 +150,7 @@ class InterestingFacts extends Component {
                     <ReloadButton loading={this.state.loading} reloadFnc={this.reloadFacts}></ReloadButton>                                              
                    
                     <Loader key={"lc1"} facts={this.state.facts} loading={this.state.loading}> 
-                        <FactsList key={"fc1"} typeId="facts" type="facts" facts={this.state.facts} />    
+                        <FactsList key={"fc1"} typeId="facts" type="facts" facts={this.state.facts} factTypes={this.state.factTypes} />    
                     </Loader>
 
                     <div className="tc ma2">
